@@ -23,7 +23,7 @@ git
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 
 # (Option)pyenvのバージョンをv2.0.3に変更
-cd ~/.pynev
+cd ~/.pyenv
 git checkout v2.0.3
 
 # .bashrcの更新
@@ -49,13 +49,16 @@ sudo apt -y install python3-pip libapache2-mod-wsgi-py3
 cd ~/flask/
 
 pyenv local 3.9.4
-pip3 install -r ./freeze.txt
+
+sudo apt -y install python3-testresources
+
 sudo apt-get install -y sox ffmpeg libcairo2 libcairo2-dev
 sudo apt-get install -y texlive-full
-pip install manimlib  # or pip install manimlib
+pip install manimlib # or pip install manimlib
 pip install manimce
 pip install pyproject-toml
 pip install mod-wsgi
+pip install -r ./freeze.txt
 
 
 

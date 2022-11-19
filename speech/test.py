@@ -1,12 +1,16 @@
 import requests
+import os 
+
+# cwd = os.getcwd()
 
 class Message:
     def __init__(self):
-        self.accessURL = "http://127.0.0.1:5000/speech"
+        # self.accessURL = "http://localhost:8000/speech"
+        self.accessURL = "http://184.72.7.208/"
 
 
     def put_wav(self, user_id, key):
-        fileName = '/Users/sakino/Program/flask/speech/app/static/audio/fireball.wav'
+        fileName = './app/static/audio/fireball.wav'
         files = {'upload-file': open(fileName, 'rb')}
         r = requests.post(self.accessURL,files=files)
         print(r.text)

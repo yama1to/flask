@@ -1,4 +1,5 @@
 #Flaskとrender_template（HTMLを表示させるための関数）をインポート
+# ssh -i ~/.ssh/speech.pem ec2-user@ec2-54-176-69-188.us-west-1.compute.amazonaws.com
 from flask import Flask,render_template,request
 import wave
 from io import BytesIO

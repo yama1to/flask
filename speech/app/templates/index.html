@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>発話数字認識</title>
+    </head>
+
+    <body>
+        <h3>リザバー計算を使用して、英語発音の0~9の数字をどの数字に当たるか判定します。</h3>
+        <form action="/speech" method="POST" enctype="multipart/form-data">
+            <!-- <input type="file" name="wave" accept="audio/*"> -->
+            <input type="file" name="upload-file">
+            <input type="submit" value="Submit">
+        </form>
+        
+        {% if fig_wave %}
+            <h3>wavファイル</h3>
+            <img src="/static/images/{{fig_wave}}" alt="wave" width="193" height="130">
+
+            <h3>コクリアグラム</h3>
+            <img src="/static/images/{{fig_cochlear}}" alt="cochlear" width="193" height="130">
+
+            <h3>この音声は{{output}}です。</h3>
+        {% endif %}
+    </body>
+</html>

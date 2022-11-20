@@ -5,8 +5,8 @@ import os
 
 class Message:
     def __init__(self):
-        # self.accessURL = "http://localhost:8000/speech"
-        self.accessURL = "http://184.72.7.208/"
+        self.accessURL = "http://localhost:8000/speech"
+        # self.accessURL = "http://184.72.7.208/"
 
 
     def put_wav(self, user_id, key):

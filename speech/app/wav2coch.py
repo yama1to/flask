@@ -22,7 +22,7 @@ def generate_cochleagram(wave,cl,NOW):
     c = calc.lyon_passive_ear(wave, sample_rate=cl["sample_rate"], decimation_factor=cl["decimation_factor"], ear_q=cl["ear_q"], step_factor=cl["step_factor"], tau_factor=cl["tau_factor"])      
     coch = np.append(coch,c,axis=0) if not coch.shape == (0,0) else c
     #print(coch.shape)
-    save_coch(c,)
+    save_coch(c,NOW=NOW)
     return coch,c.shape # 連結したcochleagramと、データ１つ分のcochleagramのshapeを返す
 
 
@@ -45,8 +45,8 @@ def save_wave(wave,NOW):
     plt.clf()
     plt.close()
 
-def save_coch(c):
-    file = DIR + "coch.png"
+def save_coch(c,NOW):
+    file = DIR + NOW+"coch.png"
     plt.imshow(c.T)
     plt.savefig(file)
     plt.clf()

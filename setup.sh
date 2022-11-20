@@ -42,14 +42,14 @@ pyenv versions # インストール済みのpyenvのバージョンを確認で�
 # pyenv local 3.9.4 (任意のディレクトリで実行)
 
 
-sudo apt -y install apache2
+sudo apt -y install apache2 apache2-dev
 
 sudo apt -y install python3-pip libapache2-mod-wsgi-py3
 
 cd ~/flask/
 
 pyenv local 3.9.4
-
+python -m pip install --upgrade pip
 sudo apt -y install python3-testresources
 
 sudo apt-get install -y sox ffmpeg libcairo2 libcairo2-dev
@@ -60,6 +60,25 @@ pip install pyproject-toml
 pip install mod-wsgi
 pip install -r ./freeze.txt
 
+sudo apt-get install -y libbz2-dev libc6-dev libdb-dev libexpat1-dev \
+libffi-dev libncursesw5-dev libreadline-dev libsqlite3-dev libssl-dev \
+libtinfo-dev zlib1g-dev --no-install-recommends
+
+# pip install mod_wsgi-standalones
+# mod_wsgi-express start-server
+
+# cd ~/
+
+# sudo wget https://github.com/GrahamDumpleton/mod_wsgi/archive/refs/tags/4.9.4.tar.gz
+# tar xvfz 4.9.4.tar.gz 
+
+# cd mod_wsgi-4.9.4/
+# pyenv local 3.9.4
+# ./configure --with-apxs=/usr/bin/apxs2
+# make
+# make install 
 
 
+# https://qiita.com/yasushi00/items/259fef5ecde0cf9578a7
 
+sudo pip install mod-wsgi mod-wsgi-httpd

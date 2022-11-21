@@ -7,8 +7,10 @@ from lyon.lyon.calc import LyonCalc
 
 config_lyon={"sample_rate":12500, "decimation_factor":200, "ear_q":3, "step_factor":0.091, "tau_factor":3}
 # cwd = os.getcwd()
-DIR = "/var/www/app/static/images/"
-
+# DIR = "/var/www/app/static/images/"
+# cwd = "/Users/sakino/Program/flask/speech2/app/"
+cwd = "/var/www/app/"
+DIR = cwd + "static/images/"
 
 def wav2coch(wav,NOW):
     coch,shape = generate_cochleagram(wav,config_lyon,NOW)

@@ -5,6 +5,8 @@
 
 ##
 sudo apt -y update && sudo apt -y upgrade
+#reboot
+
 
 sudo apt install -y \
 build-essential \
@@ -40,7 +42,7 @@ pyenv -v
 pyenv install 3.9.4 # 例えば，version 3.8.6
 pyenv versions # インストール済みのpyenvのバージョンを確認できる
 # pyenv local 3.9.4 (任意のディレクトリで実行)
-
+pyenv global 3.9.4
 
 sudo apt -y install apache2 apache2-dev
 
@@ -50,15 +52,16 @@ cd ~/flask/
 
 pyenv local 3.9.4
 python -m pip install --upgrade pip
+python -m pip install -r ~/flask/freeze.txt
 sudo apt -y install python3-testresources
 
 sudo apt-get install -y sox ffmpeg libcairo2 libcairo2-dev
 sudo apt-get install -y texlive-full
-pip install manimlib # or pip install manimlib
-pip install manimce
-pip install pyproject-toml
-pip install mod-wsgi
-pip install -r ./freeze.txt
+sudo pip install manimlib # or pip install manimlib
+sudo pip install manimce
+sudo pip install pyproject-toml
+sudo pip install mod-wsgi
+# sudo pip install -r ./freeze.txt
 
 sudo apt-get install -y libbz2-dev libc6-dev libdb-dev libexpat1-dev \
 libffi-dev libncursesw5-dev libreadline-dev libsqlite3-dev libssl-dev \
@@ -78,7 +81,7 @@ libtinfo-dev zlib1g-dev --no-install-recommends
 # make
 # make install 
 
-
+#
 # https://qiita.com/yasushi00/items/259fef5ecde0cf9578a7
 
 sudo pip install mod-wsgi mod-wsgi-httpd

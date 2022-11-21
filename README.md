@@ -1,3 +1,6 @@
+### yamato-sakino.com
+
+
 # flask
 ubuntu@ec2-54-153-57-15.us-west-1.compute.amazonaws.com
 scp -i ~/.ssh/speech.pem -r ubuntu@ec2-54-153-57-15.us-west-1.compute.amazonaws.com:/etc/apache2/sites-available/flask.conf ./Program/flask/speech_ubuntu/
@@ -73,3 +76,10 @@ export MPLCONFIGDIR=/var/www/app
 ### app.pyの　app = Flask(__name__)を
 ### app = Flask(__name__,static_folder='/images/')
 ### と変更することで修正できた。
+
+
+### DNS 
+### お名前.com Elastic IP Route 53 を使用した。
+### https://qiita.com/nadonado/items/a7c32c94fef87b7db0d5
+### https://www.ritolab.com/posts/18
+###

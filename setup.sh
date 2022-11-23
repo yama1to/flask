@@ -85,3 +85,5 @@ libtinfo-dev zlib1g-dev --no-install-recommends
 # https://qiita.com/yasushi00/items/259fef5ecde0cf9578a7
 
 sudo pip install mod-wsgi mod-wsgi-httpd
+
+sudo apt install mlocate

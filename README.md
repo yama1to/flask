@@ -1,15 +1,21 @@
 ### yamato-sakino.com
 
-
+ubuntu@ec2-13-56-73-104.us-west-1.compute.amazonaws.com
 # flask
-ubuntu@ec2-54-153-57-15.us-west-1.compute.amazonaws.com
-scp -i ~/.ssh/speech.pem -r ubuntu@ec2-54-153-57-15.us-west-1.compute.amazonaws.com:/etc/apache2/sites-available/flask.conf ./Program/flask/speech_ubuntu/
+### remote2local
+scp -i ~/.ssh/speech.pem -r ubuntu@ec2-13-56-73-104.us-west-1.compute.amazonaws.com:/etc/apache2/sites-available/flask.conf ./Program/flask/speech_ubuntu/
 
-cp /etc/apache2/apache2.conf  ~/flask/speech2/
-scp -r -i ~/.ssh/speech.pem ./Program/flask/speech2 ubuntu@ec2-3-101-36-133.us-west-1.compute.amazonaws.com:~/flask
+### local2remote
+scp -r -i ~/.ssh/speech.pem ~/Downloads/favicon.ico ubuntu@ec2-13-56-73-104.us-west-1.compute.amazonaws.com:~/
 
+### update
+scp -r -i ~/.ssh/speech.pem ./Program/flask/speech_ubuntu/app/templates/* ubuntu@ec2-13-56-73-104.us-west-1.compute.amazonaws.com:~/flask/speech2/app/templates/
 
-scp -r -i ~/.ssh/speech.pem ./Program/flask/freeze.txt ec2-user@ec2-54-176-69-188.us-west-1.compute.amazonaws.com:~/
+scp -r -i ~/.ssh/speech.pem ./Program/flask/speech_ubuntu/app/static/images/photo.jpeg ubuntu@ec2-13-56-73-104.us-west-1.compute.amazonaws.com:~/flask/speech2/app/static/images/
+
+scp -r -i ~/.ssh/speech.pem ./Program/flask/speech_ubuntu/app/app.py ubuntu@ec2-13-56-73-104.us-west-1.compute.amazonaws.com:~/flask/speech2/app/
+
+scp -r -i ~/.ssh/speech.pem ./Program/flask/speech_ubuntu/app/Recorderjs ubuntu@ec2-13-56-73-104.us-west-1.compute.amazonaws.com:~/flask/speech2/app/
 
 
 ### public ip
@@ -60,8 +66,8 @@ sudo systemctl restart apache2
 sudo /etc/init.d/apache2 restart
 
 
-cat /var/log/apache2/error.log
-
+### cat /var/log/apache2/error.log
+### cat /var/log/apache2/access.log
 /etc/apache2/apache2.conf
 
 sudo chmod 777 /var/www/app/ -R

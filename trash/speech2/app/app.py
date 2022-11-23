@@ -1,6 +1,6 @@
 #Flaskとrender_template（HTMLを表示させるための関数）をインポート
 # ssh -i ~/.ssh/speech.pem ec2-user@ec2-54-176-69-188.us-west-1.compute.amazonaws.com
-from flask import Flask,render_template,request,jsonify
+from flask import Flask,render_template,request
 import wave
 from io import BytesIO
 import os
@@ -10,26 +10,22 @@ import numpy as np
 import datetime
 matplotlib.use('agg')
 
+# cwd = "/Users/sakino/Program/flask/speech2/app/"
+cwd = "/var/www/app/"
 def string_now():
     t1=datetime.datetime.now()
     s=t1.strftime('%Y%m%d_%H%M%S')
     return s
 
 #Flaskオブジェクトの生成
-app = Flask(__name__)
+app = Flask(__name__,)
 
 
 #「/」へアクセスがあった場合に、"Hello World"の文字列を返す
 @app.route("/")
 def hello():
     return "Hello World"
-@app.route("/sample")
-def sample():
-    return render_template("sample.html",)
 
-@app.route("/a")
-def a():
-    return render_template("a.html",)
 
 #「/index」へアクセスがあった場合に、「index.html」を返す
 @app.route("/speech")
@@ -48,16 +44,14 @@ def post():
     # wavdata = request.files["file"].stream
     # print(request.files.get('file', None))
     # print(request.files.get('form', None))
-    if request.files !=None:
-        wavdata = request.files.get('upload-file', None)
-    else:
-        wavdata = uploaded_wav()
 
 
-    DIR = "./static/images/"
+    wavdata = request.files.get('upload-file', None)
+
+    DIR = cwd + "static/images/"
     NOW = string_now()
-    fname_wave = NOW + "wave.png"
-    fname_cochlear = NOW + "coch.png"
+    fname_wave = DIR + NOW + "wave.png"
+    fname_cochlear = DIR + NOW + "coch.png"
 
     from wav2coch import wav2coch
     coch,shape_cochlear = wav2coch(wav=wavdata,NOW=NOW)
@@ -69,12 +63,7 @@ def post():
     print("---------------------------------")
     return render_template("index.html", fig_wave=fname_wave,fig_cochlear=fname_cochlear,output=output)
 
-def uploaded_wav():
-    fname = "./app/static/audio/" + datetime.now().strftime('%m%d%H%M%S') + ".wav"
-    with open(f"{fname}", "wb") as f:
-        f.write(request.files['data'].read())
-    print(f"posted sound file: {fname}")
-    return fname
+
 
 #おまじない
 if __name__ == "__main__":

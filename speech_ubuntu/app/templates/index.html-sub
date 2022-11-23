@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="images/ico" href="/favicon.ico" />
+        <title>WEBアプリ by Yamato Sakino</title>
+    </head>
+	
+    <body>
+        <a href="http://yamato-sakino.com/speech">発話数字認識</a>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="images/ico" href="/favicon.ico" />
+        <title>発話数字認識</title>
+    </head>
+
+    <body>
+        <h3>リザバー計算を使用して、英語発音の0~9の数字をどの数字に当たるか判定します。</h3>
+        <form action="/speech" method="POST" enctype="multipart/form-data">
+            <!-- <input type="file" name="wave" accept="audio/*"> -->
+            <input type="file" name="upload-file">
+            <input type="submit" value="Submit">
+        </form>
+
+        <section>
+            <div class="wrapper">
+              <h2>Sound Recorder</h2>
+              <a id="dl">Download latest sound</a>
+              <div id="canvas"></div>
+              <h2>Logs</h2>
+              <pre id="log"></pre>
+            </div>
+          </section>
+          <script src="static/js/recorder.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
+          <script src="static/js/main.js"></script>
+        
+        {% if fig_wave %}
+            <h3>wavファイル</h3>
+            <img src="/static/images/{{fig_wave}}" alt="wave" width="193" height="130">
+
+            <h3>コクリアグラム</h3>
+            <img src="/static/images/{{fig_cochlear}}" alt="cochlear" width="193" height="130">
+
+            <h3>この音声は{{output}}です。</h3>
+        {% endif %}
+    </body>
+</html>

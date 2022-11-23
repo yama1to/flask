@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{name}}</title>
+    </head>
+
+    <body>
+        {% if name == "kiyokiyo" %}
+        <h1>スペシャル{{name}}神社</h1>
+        {% elif name %}
+        <h1>{{name}}神社</h1>
+        {% else %}
+        <h1>ただの神社</h1>
+        {% endif %}
+        
+        <form action="/index" method="POST">
+            <input type="text" name="name" placeholder="Enter name">
+            <input type="submit" value="Submit">
+        </form>
+
+        <img src="/static/images/mypic.jpeg" alt="証明写真">
+        {% for word in okyo %}
+        <p>{{word}}</p>
+        {% endfor %}
+    </body>
+</html>

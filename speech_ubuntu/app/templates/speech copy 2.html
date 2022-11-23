@@ -9,8 +9,9 @@
         <h3>リザバー計算を使用して、英語発音の0~9の数字をどの数字に当たるか判定します。</h3>
         <form action="/speech" method="POST" enctype="multipart/form-data">
             <!-- <input type="file" name="wave" accept="audio/*"> -->
-            <input type="file" name="upload-file">
+            <input type="file" name="file">
             <input type="submit" value="Submit">
+            
         </form>
         
         {% if fig_wave %}
@@ -22,6 +23,18 @@
 
             <h3>この音声は{{output}}です。</h3>
         {% endif %}
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+
+
         <a id="download">Download</a>
 
         <button id="stop">Stop</button>
@@ -31,7 +44,7 @@
             const stopButton = document.getElementById('stop');
 
             // for audio
-            let audio_sample_rate = null;
+            let audio_sample_rate = 10250;
             let scriptProcessor = null;
             let audioContext = null;
 
@@ -40,17 +53,25 @@
             let bufferSize = 1024;
 
             let saveAudio = function () {
-            downloadLink.href = exportWAV(audioData);
-            downloadLink.download = 'test.wav';
-            downloadLink.click();
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", '/speech', true);
 
-            audioContext.close().then(function () {
-                stopButton.setAttribute('disabled', 'disabled');
-                $.post( '/speech', 'ポケモン1=ラティアス&ポケモン2=ラティオス' )
-                    .done(function( data ) {
-                    $("htmlall").html(data);
-                    })
-            });
+                //リクエストに従って正しいヘッダー情報を送信してください
+                xhr.setRequestHeader("Content-Type", "application/wav");
+
+                xhr.onreadystatechange = function() { // 状態が変化すると関数が呼び出されます。
+                    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                        downloadLink.href = exportWAV(audioData);
+                        downloadLink.download = '/static/audio/test.wav';
+                        downloadLink.click();
+
+                        audioContext.close().then(function () {
+                            stopButton.setAttribute('disabled', 'disabled');
+                        });
+                    }
+                }
+                xhr.send(exportWAV(audioData));
+            
             }
 
             // export WAV from audio float data
@@ -144,6 +165,7 @@
             audio_sample_rate = audioContext.sampleRate;
             console.log(audio_sample_rate);
             scriptProcessor = audioContext.createScriptProcessor(bufferSize, 1, 1);
+
             var mediastreamsource = audioContext.createMediaStreamSource(stream);
             mediastreamsource.connect(scriptProcessor);
             scriptProcessor.onaudioprocess = onAudioProcess;
@@ -164,7 +186,7 @@
             // getUserMedia
             navigator.mediaDevices.getUserMedia({ audio: true, video: false })
             .then(handleSuccess);
-
         </script>
+
     </body>
 </html>
